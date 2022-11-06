@@ -1,0 +1,245 @@
+{
+    "configurations": [
+        {
+            "type": "aws-sam",
+            "request": "direct-invoke",
+            "name": "Dropbox-webhook Auth Challenge",
+            "invokeTarget": {
+                "target": "code",
+                "projectRoot": "${workspaceFolder}/lambda/Dropbox-webhook",
+                "lambdaHandler": "lambda_function.lambda_handler"
+            },
+            "lambda": {
+                "runtime": "python3.9",
+                "payload": {
+                    "json": {
+                        "queryStringParameters": {
+                            "challenge": "kBNzrB7R_gkncES-JACHkXOVplySxH-B8aIHAu7su8w"
+                        }
+                    }
+                },
+                "environmentVariables": {}
+            }
+        },
+        {
+            "type": "aws-sam",
+            "request": "direct-invoke",
+            "name": "Dropbox-webhook Webhook file deleted",
+            "invokeTarget": {
+                "target": "code",
+                "projectRoot": "${workspaceFolder}/lambda/Dropbox-webhook",
+                "lambdaHandler": "lambda_function.lambda_handler"
+            },
+            "lambda": {
+                "runtime": "python3.9",
+                "payload": {
+                    "json": {
+                        "httpMethod": "POST",
+                        "headers": {
+                            "Content-Length": "108",
+                            "Content-Type": "application/json",
+                            "Host": "1yzmre8f73.execute-api.eu-central-1.amazonaws.com",
+                            "User-Agent": "DropboxWebhooks/1.0",
+                            "X-Amzn-Trace-Id": "Root=1-6365b62c-5f9d79e348e79ae26e327492",
+                            "X-Dropbox-Signature": "317b3481e7bf4b9f770927ad9fc3b92d8580d3fbba226d390803d1e4dc71659a",
+                            "X-Forwarded-For": "54.91.30.207",
+                            "X-Forwarded-Port": "443",
+                            "X-Forwarded-Proto": "https",
+                            "accept": "* /*",
+                            "accept-encoding": "gzip,deflate"
+                        },
+                        "multiValueHeaders": {
+                            "Content-Length": [
+                                "108"
+                            ],
+                            "Content-Type": [
+                                "application/json"
+                            ],
+                            "Host": [
+                                "1yzmre8f73.execute-api.eu-central-1.amazonaws.com"
+                            ],
+                            "User-Agent": [
+                                "DropboxWebhooks/1.0"
+                            ],
+                            "X-Amzn-Trace-Id": [
+                                "Root=1-6365b62c-5f9d79e348e79ae26e327492"
+                            ],
+                            "X-Dropbox-Signature": [
+                                "317b3481e7bf4b9f770927ad9fc3b92d8580d3fbba226d390803d1e4dc71659a"
+                            ],
+                            "X-Forwarded-For": [
+                                "54.91.30.207"
+                            ],
+                            "X-Forwarded-Port": [
+                                "443"
+                            ],
+                            "X-Forwarded-Proto": [
+                                "https"
+                            ],
+                            "accept": [
+                                "*/*"
+                            ],
+                            "accept-encoding": [
+                                "gzip,deflate"
+                            ]
+                        },
+                        "queryStringParameters": null,
+                        "multiValueQueryStringParameters": null,
+                        "requestContext": {
+                            "accountId": "574639460976",
+                            "apiId": "1yzmre8f73",
+                            "domainName": "1yzmre8f73.execute-api.eu-central-1.amazonaws.com",
+                            "domainPrefix": "1yzmre8f73",
+                            "extendedRequestId": "bGlnDgdxFiAEJDA=",
+                            "httpMethod": "POST",
+                            "identity": {
+                                "accessKey": null,
+                                "accountId": null,
+                                "caller": null,
+                                "cognitoAmr": null,
+                                "cognitoAuthenticationProvider": null,
+                                "cognitoAuthenticationType": null,
+                                "cognitoIdentityId": null,
+                                "cognitoIdentityPoolId": null,
+                                "principalOrgId": null,
+                                "sourceIp": "54.91.30.207",
+                                "user": null,
+                                "userAgent": "DropboxWebhooks/1.0",
+                                "userArn": null
+                            },
+                            "path": "/default/Dropbox-webhook",
+                            "protocol": "HTTP/1.1",
+                            "requestId": "bGlnDgdxFiAEJDA=",
+                            "requestTime": "05/Nov/2022: 01: 02: 36 +0000",
+                            "requestTimeEpoch": 1667610156911,
+                            "resourceId": "ANY /Dropbox-webhook",
+                            "resourcePath": "/Dropbox-webhook",
+                            "stage": "default"
+                        },
+                        "pathParameters": null,
+                        "stageVariables": null,
+                        "body": {
+                            "delta": {
+                                "users": [
+                                    342143391
+                                ]
+                            },
+                            "list_folder": {
+                                "accounts": [
+                                    "dbid:AAB4hAbDYaDdlX6w8K7yKnIbT3LnWwlQPdg"
+                                ]
+                            }
+                        },
+                        "isBase64Encoded": false
+                    }
+                }
+            }
+        },
+        {
+            "type": "aws-sam",
+            "request": "direct-invoke",
+            "name": "Dropbox-webhook Webhook Added",
+            "invokeTarget": {
+                "target": "code",
+                "projectRoot": "${workspaceFolder}/lambda/Dropbox-webhook",
+                "lambdaHandler": "lambda_function.lambda_handler"
+            },
+            "lambda": {
+                "runtime": "python3.9",
+                "payload": {
+                    "json": {
+                        "version": "1.0",
+                        "resource": "/Dropbox-webhook",
+                        "path": "/default/Dropbox-webhook",
+                        "httpMethod": "POST",
+                        "headers": {
+                            "Content-Length": "108",
+                            "Content-Type": "application/json",
+                            "Host": "1yzmre8f73.execute-api.eu-central-1.amazonaws.com",
+                            "User-Agent": "DropboxWebhooks/1.0",
+                            "X-Amzn-Trace-Id": "Root=1-6365b62c-5f9d79e348e79ae26e327492",
+                            "X-Dropbox-Signature": "317b3481e7bf4b9f770927ad9fc3b92d8580d3fbba226d390803d1e4dc71659a",
+                            "X-Forwarded-For": "54.91.30.207",
+                            "X-Forwarded-Port": "443",
+                            "X-Forwarded-Proto": "https",
+                            "accept": "*/*",
+                            "accept-encoding": "gzip,deflate"
+                        },
+                        "multiValueHeaders": {
+                            "Content-Length": [
+                                "108"
+                            ],
+                            "Content-Type": [
+                                "application/json"
+                            ],
+                            "Host": [
+                                "1yzmre8f73.execute-api.eu-central-1.amazonaws.com"
+                            ],
+                            "User-Agent": [
+                                "DropboxWebhooks/1.0"
+                            ],
+                            "X-Amzn-Trace-Id": [
+                                "Root=1-6365b62c-5f9d79e348e79ae26e327492"
+                            ],
+                            "X-Dropbox-Signature": [
+                                "317b3481e7bf4b9f770927ad9fc3b92d8580d3fbba226d390803d1e4dc71659a"
+                            ],
+                            "X-Forwarded-For": [
+                                "54.91.30.207"
+                            ],
+                            "X-Forwarded-Port": [
+                                "443"
+                            ],
+                            "X-Forwarded-Proto": [
+                                "https"
+                            ],
+                            "accept": [
+                                "*/*"
+                            ],
+                            "accept-encoding": [
+                                "gzip,deflate"
+                            ]
+                        },
+                        "queryStringParameters": "None",
+                        "multiValueQueryStringParameters": "None",
+                        "requestContext": {
+                            "accountId": "574639460976",
+                            "apiId": "1yzmre8f73",
+                            "domainName": "1yzmre8f73.execute-api.eu-central-1.amazonaws.com",
+                            "domainPrefix": "1yzmre8f73",
+                            "extendedRequestId": "bGlnDgdxFiAEJDA=",
+                            "httpMethod": "POST",
+                            "identity": {
+                                "accessKey": "None",
+                                "accountId": "None",
+                                "caller": "None",
+                                "cognitoAmr": "None",
+                                "cognitoAuthenticationProvider": "None",
+                                "cognitoAuthenticationType": "None",
+                                "cognitoIdentityId": "None",
+                                "cognitoIdentityPoolId": "None",
+                                "principalOrgId": "None",
+                                "sourceIp": "54.91.30.207",
+                                "user": "None",
+                                "userAgent": "DropboxWebhooks/1.0",
+                                "userArn": "None"
+                            },
+                            "path": "/default/Dropbox-webhook",
+                            "protocol": "HTTP/1.1",
+                            "requestId": "bGlnDgdxFiAEJDA=",
+                            "requestTime": "05/Nov/2022:01:02:36 +0000",
+                            "requestTimeEpoch": 1667610156911,
+                            "resourceId": "ANY /Dropbox-webhook",
+                            "resourcePath": "/Dropbox-webhook",
+                            "stage": "default"
+                        },
+                        "pathParameters": "None",
+                        "stageVariables": "None",
+                        "body": "{\"delta\": {\"users\": [342143391]}, \"list_folder\": {\"accounts\": [\"dbid:AAB4hAbDYaDdlX6w8K7yKnIbT3LnWwlQPdg\"]}}",
+                        "isBase64Encoded": false
+                    }
+                }
+            }
+        }
+    ]
+}
