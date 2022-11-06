@@ -14,6 +14,12 @@ terraform {
     }
   }
 
+  backend "s3" {
+    bucket = "whlsckr-terraform"
+    region = "eu-central-1"
+    key    = "terraform.tfstate"
+  }
+
   required_version = "~> 1.0"
 }
 
