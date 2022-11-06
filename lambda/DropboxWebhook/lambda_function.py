@@ -10,10 +10,6 @@ requests_log = logging.getLogger("requests.packages.urllib3")
 requests_log.setLevel(logging.DEBUG)
 requests_log.propagate = True
 
-refresh_token = "AI96VOgGGbMAAAAAAAAAAWPHo8j_piuiq1lD_M5k6npJ8yGlBkCYgiDN18PVIcVf"
-app_key = "0782fwlvi1phfgf"
-app_secret = "9llu6y52oty3et8"
-
 def process_account(account):
     pass
 
@@ -37,6 +33,7 @@ def lambda_handler(event, context):
 
     signature = event.get("headers", {}).get("X-Dropbox-Signature", "")
     payload = event.get("body", {})
+    app_secret = "" # todo: fetch
     try:
         valid = hmac.compare_digest(signature, hmac.new(app_secret.encode(), json.dumps(payload, sort_keys=True).encode(), sha256).hexdigest())
     except TypeError:
