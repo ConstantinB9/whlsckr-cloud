@@ -32,6 +32,23 @@ resource "aws_s3_bucket_acl" "bucket_acl" {
   acl    = "private"
 }
 
+
+resource "aws_s3_bucket" "terraform_bucket" {
+  bucket = "whlsckr-terraform"
+}
+
+resource "aws_s3_bucket_acl" "terraform_bucket_acl" {
+  bucket = aws_s3_bucket.terraform_bucket.id
+  acl    = "private"
+}
+
+resource "aws_s3_bucket_versioning" "terraform_bucket" {
+  bucket = aws_s3_bucket.terraform_bucket.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
 ######### LAMBDA FUNCTIONS #########
 
 # DropboxWebhook
@@ -200,18 +217,18 @@ resource "aws_iam_policy" "lambda_invoke_policy" {
   description = "Allow invoking of a Lambda function"
 
   policy = jsonencode({
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Action": [
-        "lambda:InvokeFunction",
-        "lambda:InvokeAsync"
-      ],
-      "Effect": "Allow",
-      "Resource": "*"
-    }
-  ]
-})
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Action" : [
+          "lambda:InvokeFunction",
+          "lambda:InvokeAsync"
+        ],
+        "Effect" : "Allow",
+        "Resource" : "*"
+      }
+    ]
+  })
 }
 
 resource "aws_iam_role_policy_attachment" "lambda_invoke_policy" {
