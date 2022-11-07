@@ -1,11 +1,5 @@
-output "dropbox_webhook_function_name" {
-  description = "Name of the dropbox_webhook Lambda function."
-
-  value = aws_lambda_function.dropbox_webhook.function_name
-}
-
 output "base_url" {
-  description = "Base URL for API Gateway stage."
+  description = "base url"
 
-  value = aws_apigatewayv2_stage.whlsckr_api.invoke_url
+  value = aws_apigatewayv2_stage.whlsckr_api_stage.invoke_url
 }
