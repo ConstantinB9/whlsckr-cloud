@@ -10,6 +10,11 @@ resource "aws_iam_role_policy_attachment" "lambda_dropbox_webhook_allow_app_data
   policy_arn = aws_iam_policy.allow_app_data_db_read.arn
 }
 
+resource "aws_iam_role_policy_attachment" "lambda_dropbox_webhook_allow_invoke_lambda" {
+  role       = module.lambda_drobox_webhook.aws_iam_role_name
+  policy_arn = aws_iam_policy.lambda_invoke_policy.arn
+}
+
 resource "aws_apigatewayv2_integration" "dropbox_webhook" {
   api_id = aws_apigatewayv2_api.whlsckr_api.id
 
