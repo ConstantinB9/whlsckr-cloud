@@ -45,3 +45,9 @@ variable "python_version" {
   description = "Python Version to use"
   default     = "python3.9"
 }
+
+variable "timeout" {
+  type        = number
+  description = "Lambda Function Timeout"
+  default     = 3
+}

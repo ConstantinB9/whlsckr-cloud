@@ -29,7 +29,9 @@ def lambda_handler(event, context):
         }
 
     signature = event.get("headers", {}).get("X-Dropbox-Signature", "")
-    payload = event.get("body", {})
+    payload = json.loads(event.get("body", {}))
+    if isinstance(payload, str):
+        payload = json.loads(payload)
 
     try:
         app_secret = dynamodb_client.get_item(
@@ -46,9 +48,9 @@ def lambda_handler(event, context):
             signature,
             hmac.new(
                 app_secret.encode(),
-                event.get('body', "").encode(),
+                event.get("body", "").encode(),
                 sha256,
-            ).hexdigest()
+            ).hexdigest(),
         )
     except TypeError:
         logging.warning("Type Error")

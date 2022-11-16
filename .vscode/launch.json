@@ -1,6 +1,21 @@
 {
     "configurations": [
         {
+            "name": "Python: FastAPI",
+            "type": "python",
+            "request": "launch",
+            "module": "uvicorn",
+            "cwd": "${workspaceFolder}/dashboard",
+            "args": [
+                "main:app",
+                "--host",
+                "0.0.0.0",
+                "--reload"
+            ],
+            "jinja": true,
+            "justMyCode": true,
+        },
+        {
             "type": "aws-sam",
             "request": "direct-invoke",
             "name": "Dropbox-webhook Auth Challenge",
@@ -141,7 +156,7 @@
             "name": "Dropbox-webhook Webhook Added",
             "invokeTarget": {
                 "target": "code",
-                "projectRoot": "${workspaceFolder}/lambda/Dropbox-webhook",
+                "projectRoot": "${workspaceFolder}/lambda/DropboxWebhook",
                 "lambdaHandler": "lambda_function.lambda_handler"
             },
             "lambda": {
@@ -149,17 +164,17 @@
                 "payload": {
                     "json": {
                         "version": "1.0",
-                        "resource": "/Dropbox-webhook",
-                        "path": "/default/Dropbox-webhook",
+                        "resource": "/dropbox_webhook",
+                        "path": "/whlsckr/dropbox_webhook",
                         "httpMethod": "POST",
                         "headers": {
                             "Content-Length": "108",
                             "Content-Type": "application/json",
-                            "Host": "1yzmre8f73.execute-api.eu-central-1.amazonaws.com",
+                            "Host": "c1hls2l1pl.execute-api.eu-central-1.amazonaws.com",
                             "User-Agent": "DropboxWebhooks/1.0",
-                            "X-Amzn-Trace-Id": "Root=1-6365b62c-5f9d79e348e79ae26e327492",
-                            "X-Dropbox-Signature": "317b3481e7bf4b9f770927ad9fc3b92d8580d3fbba226d390803d1e4dc71659a",
-                            "X-Forwarded-For": "54.91.30.207",
+                            "X-Amzn-Trace-Id": "Root=1-6369654a-72f40a46559e51503bd36e14",
+                            "X-Dropbox-Signature": "c99c013d8971f82c60964d87cb740f27e8f9f4d5c34068a0c08989574236c281",
+                            "X-Forwarded-For": "54.145.180.202",
                             "X-Forwarded-Port": "443",
                             "X-Forwarded-Proto": "https",
                             "accept": "*/*",
@@ -173,19 +188,19 @@
                                 "application/json"
                             ],
                             "Host": [
-                                "1yzmre8f73.execute-api.eu-central-1.amazonaws.com"
+                                "c1hls2l1pl.execute-api.eu-central-1.amazonaws.com"
                             ],
                             "User-Agent": [
                                 "DropboxWebhooks/1.0"
                             ],
                             "X-Amzn-Trace-Id": [
-                                "Root=1-6365b62c-5f9d79e348e79ae26e327492"
+                                "Root=1-6369654a-72f40a46559e51503bd36e14"
                             ],
                             "X-Dropbox-Signature": [
-                                "317b3481e7bf4b9f770927ad9fc3b92d8580d3fbba226d390803d1e4dc71659a"
+                                "c99c013d8971f82c60964d87cb740f27e8f9f4d5c34068a0c08989574236c281"
                             ],
                             "X-Forwarded-For": [
-                                "54.91.30.207"
+                                "54.145.180.202"
                             ],
                             "X-Forwarded-Port": [
                                 "443"
@@ -204,10 +219,10 @@
                         "multiValueQueryStringParameters": "None",
                         "requestContext": {
                             "accountId": "574639460976",
-                            "apiId": "1yzmre8f73",
-                            "domainName": "1yzmre8f73.execute-api.eu-central-1.amazonaws.com",
-                            "domainPrefix": "1yzmre8f73",
-                            "extendedRequestId": "bGlnDgdxFiAEJDA=",
+                            "apiId": "c1hls2l1pl",
+                            "domainName": "c1hls2l1pl.execute-api.eu-central-1.amazonaws.com",
+                            "domainPrefix": "c1hls2l1pl",
+                            "extendedRequestId": "bPzDrgu6liAEMLA=",
                             "httpMethod": "POST",
                             "identity": {
                                 "accessKey": "None",
@@ -219,19 +234,19 @@
                                 "cognitoIdentityId": "None",
                                 "cognitoIdentityPoolId": "None",
                                 "principalOrgId": "None",
-                                "sourceIp": "54.91.30.207",
+                                "sourceIp": "54.145.180.202",
                                 "user": "None",
                                 "userAgent": "DropboxWebhooks/1.0",
                                 "userArn": "None"
                             },
-                            "path": "/default/Dropbox-webhook",
+                            "path": "/whlsckr/dropbox_webhook",
                             "protocol": "HTTP/1.1",
-                            "requestId": "bGlnDgdxFiAEJDA=",
-                            "requestTime": "05/Nov/2022:01:02:36 +0000",
-                            "requestTimeEpoch": 1667610156911,
-                            "resourceId": "ANY /Dropbox-webhook",
-                            "resourcePath": "/Dropbox-webhook",
-                            "stage": "default"
+                            "requestId": "bPzDrgu6liAEMLA=",
+                            "requestTime": "07/Nov/2022:20:06:34 +0000",
+                            "requestTimeEpoch": 1667851594579,
+                            "resourceId": "ANY /dropbox_webhook",
+                            "resourcePath": "/dropbox_webhook",
+                            "stage": "whlsckr"
                         },
                         "pathParameters": "None",
                         "stageVariables": "None",

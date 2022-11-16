@@ -3,6 +3,12 @@
 resource "aws_apigatewayv2_api" "whlsckr_api" {
   name          = "whlsckr_api_gateway"
   protocol_type = "HTTP"
+  cors_configuration {
+    allow_origins = ["*"] # todo: update!!! 
+    allow_methods = ["POST", "GET", "OPTIONS"]
+    allow_headers = ["content-type"]
+    max_age = 300
+  }
 }
 
 resource "aws_apigatewayv2_stage" "whlsckr_api_stage" {
