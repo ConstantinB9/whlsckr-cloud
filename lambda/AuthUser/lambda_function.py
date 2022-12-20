@@ -30,23 +30,21 @@ async def get_user_data_from_email(email: str):
         match_acc = acc_matches.get("Items", [None])[0]
     except IndexError:
         return None
-    
+
     return user_data_table.query(
         KeyConditionExpression=Key("UserId").eq(match_acc["UserId"])
     ).get("Items", [None])[0]
 
 
-
 async def main(event, context):
-    email = event.get("queryStringParameters", {}).get("email", None)
+    email = event.get("queryStringParameters", {}).get("email", "").lower()
     password = event.get("queryStringParameters", {}).get("password", None)
 
-    if email is None or password is None:
+    if email == "" or password is None:
         return {"statusCode": 400, "details": "Missing field 'user' or 'password'"}
 
     whlsckr_secret_task = asyncio.create_task(get_whlsckr_secret())
     user_data_entry = await get_user_data_from_email(email=email)
-    
     if user_data_entry is None:
         return {"statusCode": 400, "details": "Credential Invalid"}
 
@@ -54,7 +52,11 @@ async def main(event, context):
         whlsckr_secret = await whlsckr_secret_task
 
         user_jwt = jwt.encode(
-            {"email": email, "exp": int(time.time() + 7 * 24 * 60 * 60)},
+            {
+                "email": email,
+                "exp": int(time.time() + 7 * 24 * 60 * 60),
+                "uid": user_data_entry.get("UserId"),
+            },
             whlsckr_secret,
             algorithm="HS256",
         )
@@ -62,7 +64,7 @@ async def main(event, context):
         return {
             "statusCode": 200,
             "headers": {"Set-Cookie": f"x-whlsckr-auth={user_jwt}"},
-            "body": json.dumps({'x-whlsckr-auth': user_jwt})
+            "body": json.dumps({"x-whlsckr-auth": user_jwt}),
         }
 
     return {"statusCode": 400, "details": "Credential Invalid"}

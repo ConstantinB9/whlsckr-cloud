@@ -1,7 +1,7 @@
 ######### API Gateway #########
 
-resource "aws_apigatewayv2_api" "whlsckr_api" {
-  name          = "whlsckr_api_gateway"
+resource "aws_apigatewayv2_api" "whlsckr_website_api" {
+  name          = "whlsckr_website_api_gateway"
   protocol_type = "HTTP"
   cors_configuration {
     allow_origins = ["*"] # todo: update!!! 
@@ -11,14 +11,20 @@ resource "aws_apigatewayv2_api" "whlsckr_api" {
   }
 }
 
-resource "aws_apigatewayv2_stage" "whlsckr_api_stage" {
-  api_id = aws_apigatewayv2_api.whlsckr_api.id
+resource "aws_cloudwatch_log_group" "website_api_gw" {
+  name = "/aws/api_gw/${aws_apigatewayv2_api.whlsckr_website_api.name}"
+  retention_in_days = 1
+}
 
-  name        = "whlsckr"
+
+resource "aws_apigatewayv2_stage" "whlsckr_website_api_stage" {
+  api_id = aws_apigatewayv2_api.whlsckr_website_api.id
+
+  name        = "whlsckr_website"
   auto_deploy = true
 
   access_log_settings {
-    destination_arn = aws_cloudwatch_log_group.api_gw.arn
+    destination_arn = aws_cloudwatch_log_group.website_api_gw.arn
 
     format = jsonencode({
       requestId               = "$context.requestId"
@@ -36,8 +42,3 @@ resource "aws_apigatewayv2_stage" "whlsckr_api_stage" {
   }
 }
 
-resource "aws_cloudwatch_log_group" "api_gw" {
-  name = "/aws/api_gw/${aws_apigatewayv2_api.whlsckr_api.name}"
-
-  retention_in_days = 1
-}

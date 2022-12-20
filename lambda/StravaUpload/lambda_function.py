@@ -21,10 +21,10 @@ def lambda_handler(event, context):
     secret = response["Item"]["Secret"]["S"]
 
     for record in event.get("Records", []):
-        obj_key = record["s3"]["object"]["key"]
+        obj_key = record["s3"]["object"]["key"].replace("+", " ")
 
         s3_response_object = s3_client.get_object(
-            Bucket=record["s3"]["bucket"]["name"], Key=obj_key.replace('+', ' ')
+            Bucket=record["s3"]["bucket"]["name"], Key=obj_key
         )
         object_content = BytesIO(s3_response_object["Body"].read())
         object_content.seek(0)
@@ -49,22 +49,31 @@ def lambda_handler(event, context):
         uploader = strv_client.upload_activity(
             activity_file=object_content, data_type=obj_key.split(".")[-1]
         )
-        
-        s3_client.delete_object(
-            Bucket=record["s3"]["bucket"]["name"], Key=obj_key
-        )
-        uploader.wait()
-        
+
+        s3_client.delete_object(Bucket=record["s3"]["bucket"]["name"], Key=obj_key)
+        retries = 5
+        while retries:
+            try:
+                uploader.wait()
+            except Exception as _ex:
+                retries -= 1
+                if uploader.activity_id is not None:
+                    break
+                if not retries:
+                    raise _ex
+                print(_ex)
+                time.sleep(0.5)
+        print(uploader.activity_id)
+
         boto3.client("sqs").send_message(
             QueueUrl="https://sqs.eu-central-1.amazonaws.com/574639460976/whlsckr-strava-uploads",
             MessageBody=json.dumps(
                 dict(
                     UserId=user_id,
                     ActivityId=uploader.activity_id,
-                    StatsVisibility=dict(hear_rate=False),
+                    StatsVisibility=dict(heart_rate=False),
                 )
-        ),
-)
-        
+            ),
+        )
 
     return {"statusCode": 200, "details": "Uploading to Strava"}

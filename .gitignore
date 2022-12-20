@@ -134,6 +134,7 @@ dmypy.json
 /terraform/terraform.tfstate.backup
 **/*.zip
 
-/lambda
-!lambda/**/requirements.txt
-!lambda/**/lambda_function.py
+/lambda/*/*
+!/lambda/*/requirements.txt
+!/lambda/*/lambda_function.py
+testing.py

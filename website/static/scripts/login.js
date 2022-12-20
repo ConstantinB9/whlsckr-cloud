@@ -3,17 +3,23 @@ let login_button = document.getElementById("login-button");
 let password_input = document.getElementById("login-password-input");
 let email_input = document.getElementById("login-email-input");
 
-function setCookie(cname, cvalue, exdays) {
-    const d = new Date();
-    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    let expires = "expires=" + d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
 
 login_button.addEventListener('click', async function () {
     let email = email_input.value;
     let pw = password_input.value;
-    let resp = await fetch(`https://c1hls2l1pl.execute-api.eu-central-1.amazonaws.com/whlsckr/auth?email=${email}&password=${pw}`,
+
+    if (email == "" || pw == "") {
+        let alert_placeholder = document.getElementById("CredentialAlertPlaceholder")
+        alert_placeholder.innerHTML = [
+            `<div class="alert alert-warning  alert-dismissible" role="alert">`,
+            `   <div>Pleas enter Username and Password</div>`,
+            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+            '</div>'
+        ].join('')
+        return;
+    }
+    console.log(encrypt_str(pw))
+    let resp = await fetch(`https://c1hls2l1pl.execute-api.eu-central-1.amazonaws.com/whlsckr/auth?email=${email}&password=${encrypt_str(pw)}`,
         { mode: 'cors' }
     )
     try {
@@ -25,6 +31,15 @@ login_button.addEventListener('click', async function () {
         }
         window.location.replace("/index.html");
     } catch (error) {
+        email_input.value = "";
+        password_input.value = "";
+        let alert_placeholder = document.getElementById("CredentialAlertPlaceholder")
+        alert_placeholder.innerHTML = [
+            `<div class="alert alert-danger  alert-dismissible" role="alert">`,
+            `   <div>Username or Password are invalid!</div>`,
+            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+            '</div>'
+        ].join('')
         console.log("Invalid Credentials")
     }
     console.log("Login Attempt");

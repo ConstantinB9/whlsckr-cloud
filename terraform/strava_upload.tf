@@ -22,6 +22,11 @@ resource "aws_iam_role_policy_attachment" "lambda_strava_upload_allow_allow_app_
   policy_arn = aws_iam_policy.allow_app_data_db_read.arn
 }
 
+resource "aws_iam_role_policy_attachment" "lambda_strava_upload_send_to_strava_uploads_queue_policy" {
+  role       = module.lambda_strava_upload.aws_iam_role_name
+  policy_arn = aws_iam_policy.send_to_strava_uploads_queue.arn
+}
+
 resource "aws_s3_bucket_notification" "my-trigger" {
   bucket = aws_s3_bucket.whlsckr_file_buffer_bucket.id
 
