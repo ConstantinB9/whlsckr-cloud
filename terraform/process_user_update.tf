@@ -4,6 +4,7 @@ module "lambda_process_user_update" {
   function_name    = "ProcessUserUpdate"
   lambda_bucket_id = aws_s3_bucket.lambda_bucket.id
   memory_size      = 256
+  timeout          = 500
 }
 
 resource "aws_iam_role_policy_attachment" "lambda_process_user_update_allow_app_data_db_read_policy" {
