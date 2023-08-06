@@ -62,12 +62,12 @@ def lambda_handler(event, context):
             cursor = result.cursor
             has_more = result.has_more
 
-        boto3.client("dynamodb").update_item(
-            TableName="whlsckr_user_data",
-            Key={"UserId": {"S": full_item["UserId"]}},
-            UpdateExpression="set DropboxCursor=:t",
-            ExpressionAttributeValues={":t": {"S": cursor}}
-        )
+            boto3.client("dynamodb").update_item(
+                TableName="whlsckr_user_data",
+                Key={"UserId": {"S": full_item["UserId"]}},
+                UpdateExpression="set DropboxCursor=:t",
+                ExpressionAttributeValues={":t": {"S": cursor}}
+            )
                     
     return {
         "statusCode": 200,
