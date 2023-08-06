@@ -47,7 +47,8 @@ def lambda_handler(event, context):
             )
 
         uploader = strv_client.upload_activity(
-            activity_file=object_content, data_type=obj_key.split(".")[-1]
+            activity_file=object_content, data_type=obj_key.split(".")[-1],
+            description="\n\n-- Stats Management by whlsckr-cloud"
         )
 
         s3_client.delete_object(Bucket=record["s3"]["bucket"]["name"], Key=obj_key)
