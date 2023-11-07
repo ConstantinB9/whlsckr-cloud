@@ -4,7 +4,7 @@ module "lambda_strava_upload" {
   function_name    = "StravaUpload"
   lambda_bucket_id = aws_s3_bucket.lambda_bucket.id
   memory_size      = 256
-  timeout          = 10
+  timeout          = 20
 }
 
 resource "aws_iam_role_policy_attachment" "lambda_strava_upload_allow_read_write_to_buffer_bucket_policy" {
