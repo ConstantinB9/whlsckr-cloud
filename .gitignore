@@ -138,3 +138,4 @@ dmypy.json
 !/lambda/*/requirements.txt
 !/lambda/*/lambda_function.py
 testing.py
+key/**

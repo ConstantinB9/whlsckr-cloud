@@ -1,4 +1,3 @@
-import time
 from typing import Dict, Optional
 import boto3
 import asyncio
