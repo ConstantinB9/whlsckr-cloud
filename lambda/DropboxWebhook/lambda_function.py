@@ -9,9 +9,6 @@ logging.getLogger().setLevel(logging.DEBUG)
 
 
 def lambda_handler(event, context):
-    print(event)
-    print(context)
-    print(event.get("body"), "")
 
     dynamodb_client = boto3.client("dynamodb")
 
