@@ -18,5 +18,5 @@ For this to work the user has to upload to a dropbox folder. *whlsckr-cloud* wil
 Wahoo Devices support this behavior out-of-the-box. However, the automatic strava upload has to be disabled.
 
 ## Architecture
-![Architecture](./docs/architecture.png?raw=true)
+![Architecture](./docs/architecture.drawio.svg?raw=true)
 
